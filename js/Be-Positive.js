@@ -47,50 +47,61 @@ BloodTransfusionRules = {
 
   receive_patient : function (blood_inventory, patient) {
 
-    if (patient.blood_type === "A_POS"){
-      if (blood_inventory.A_POS > 0){
+    if(patient.blood_type === BloodType.A_POS){
+
+      if(blood_inventory.A_POS > 0){
         return BloodType.A_POS;
       }else if(blood_inventory.A_NEG > 0){
         return BloodType.A_NEG;
-      } else if (blood_inventory.O_POS > 0){
+      }else if (blood_inventory.O_POS > 0){
         return BloodType.O_POS;
-      } else if (blood_inventory.O_NEG > 0){
+      }else if (blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
-    }else if (patient.blood_type === "B_POS"){
-      if (blood_inventory.B_POS > 0){
+    }else if (patient.blood_type === BloodType.B_POS){
+      if(blood_inventory.B_POS > 0){
         return BloodType.B_POS;
       }else if(blood_inventory.B_NEG > 0){
         return BloodType.B_NEG;
       }else if (blood_inventory.O_POS > 0){
         return BloodType.O_POS;
-      } else if (blood_inventory.O_NEG > 0){
+      }else if (blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
     }
-    else if (patient.blood_type === "O_POS"){
-      if (blood_inventory.O_POS > 0){
+    else if (patient.blood_type === BloodType.O_POS){
+      if(blood_inventory.O_POS > 0){
         return BloodType.O_POS;
       }else if(blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
     }
-    else if (patient.blood_type === "A_NEG"){
-      if (blood_inventory.A_NEG > 0){
+    else if(patient.blood_type === BloodType.A_NEG){
+      if(blood_inventory.A_NEG > 0){
         return BloodType.A_NEG;
       }else if(blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
     }
-    else if (patient.blood_type === "B_NEG"){
-      if (blood_inventory.B_NEG > 0){
+    else if (patient.blood_type === BloodType.B_NEG){
+      if(blood_inventory.B_NEG > 0){
         return BloodType.B_NEG;
       }else if(blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
     }
-    else if (patient.blood_type === "AB_NEG"){
-      if (blood_inventory.AB_NEG > 0){
+    else if (patient.blood_type === BloodType.AB_NEG){
+      if(blood_inventory.AB_NEG > 0){
         return BloodType.AB_NEG;
       }else if(blood_inventory.A_NEG > 0){
         return BloodType.A_NEG;
@@ -98,18 +109,28 @@ BloodTransfusionRules = {
         return BloodType.B_NEG;
       }else if(blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      }else{
+        return false;
       }
     }
-    else if (patient.blood_type === "O_NEG"){
+    else if (patient.blood_type === BloodType.O_NEG){
       if(blood_inventory.O_NEG > 0){
         return BloodType.O_NEG;
+      } else {
+        return false;
       }
     }
-    else if (patient.blood_type === "AB_POS"){
-      let maxStock = Object.keys(blood_inventory).reduce(function(a, b){return blood_inventory[a] > blood_inventory[b] ? a : b});
+    else if (patient.blood_type === BloodType.AB_POS){
+      let maxStock = Object.keys(blood_inventory).reduce(
+          function(a, b){
+            return blood_inventory[a] > blood_inventory[b] ? a : b;
+          }
+        );
       return maxStock;
     }
-    return false;
+    else{
+      return false;
+    }
   }
 
 };
